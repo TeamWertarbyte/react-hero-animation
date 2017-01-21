@@ -104,32 +104,19 @@ export default class Hero extends Component {
       }
     }
 
-    return (
-      <div style={{
-        width: this._size && this._size.width,
-        height: this._size && this._size.height
-      }}>
-        <div style={{
-          visibility: animating || visible ? 'visible' : 'hidden',
-          transition: animating ? 'all 400ms cubic-bezier(0.4, 0.0, 0.2, 1)' : null,
-          transformOrigin: 'top left',
-          transform: transform,
-          zIndex: animating ? 2000 : null
-        }}>
-          {(() => {
-            const element = React.Children.only(this.props.children)
-            return React.cloneElement(element, {
-              ref: this.setChild,
-              style: element.props.style ? {
-                ...element.props.style,
-                transition: animating ? 'all 400ms cubic-bezier(0.4, 0.0, 0.2, 1)' : element.props.style.transition,
-                width: animating && width ? width : element.props.style.width,
-                height: animating && height ? height : element.props.style.height,
-              } : style
-            })
-          })()}
-        </div>
-      </div>
-    )
+    const element = React.Children.only(this.props.children)
+    return React.cloneElement(element, {
+      ref: this.setChild,
+      style: {
+        ...(element.props.style || {}),
+        transition: animating ? 'all 400ms cubic-bezier(0.4, 0.0, 0.2, 1)' : element.props.style.transition,
+        width: animating && width ? width : element.props.style.width,
+        height: animating && height ? height : element.props.style.height,
+        visibility: animating || visible ? 'visible' : 'hidden',
+        transformOrigin: 'top left',
+        transform: transform,
+        zIndex: animating ? 2000 : element.props.style.zIndex
+      }
+    })
   }
 }
