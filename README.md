@@ -30,4 +30,8 @@ import { HeroAnimationProvider, Hero } from 'react-hero-animation'
 ## License
 The files included in this repository are licensed under the MIT license.
 
+## Related projects
+There is another project, [Pajn/react-hero-transition][react-hero-transition], that provides almost the same functionality (except for `resize`) and might be more flexible. It was published four days before this library, we just found it when we were about to publish this one.
+
 [gh-pages]: https://teamwertarbyte.github.io/react-hero-animation/
+[react-hero-transition]: https://github.com/Pajn/react-hero-transition
