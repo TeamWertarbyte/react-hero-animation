@@ -1,4 +1,5 @@
 import React, { PropTypes, Component } from 'react'
+import ReactTransitionGroup from 'react-addons-transition-group'
 
 export default class HeroAnimationProvider extends Component {
   static childContextTypes = {
@@ -14,7 +15,13 @@ export default class HeroAnimationProvider extends Component {
   }
 
   render () {
-    return <div>{this.props.children}</div>
+    return (
+      <ReactTransitionGroup
+        component='div'
+      >
+        {this.props.children}
+      </ReactTransitionGroup>
+    )
   }
 
   register (id, hero) {
@@ -48,6 +55,7 @@ export default class HeroAnimationProvider extends Component {
 
     if (visibleHero) {
       visibleHero.animateTo(show, () => {
+        this.heroes[id].visible = show
         this.heroes[id].heroes.filter((h) => h !== show).forEach((h) => h.setState({
           visible: false,
           animating: false
@@ -55,23 +63,15 @@ export default class HeroAnimationProvider extends Component {
         show.setState({
           visible: true
         })
-        this.heroes[id].visible = show
       })
     } else {
+      this.heroes[id].visible = show
       this.heroes[id].heroes.filter((h) => h !== show).forEach((h) => h.setState({
         visible: false
       }))
       show.setState({
         visible: true
       })
-      this.heroes[id].visible = show
-    }
-  }
-
-  findOther (id, hero) {
-    const heroPair = this.heroes[id]
-    if (heroPair) {
-      return heroPair.find((h) => h !== hero)
     }
   }
 }

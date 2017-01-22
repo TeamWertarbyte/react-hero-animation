@@ -25,13 +25,6 @@ export default class Hero extends Component {
   componentDidMount () {
     this.context.heroAnimationProvider.register(this.props.id, this)
   }
-  
-  componentWillUnmount () {
-    if (this._animationTimeout != null) {
-      clearTimeout(this._animationTimeout)
-    }
-    this.context.heroAnimationProvider.unregister(this.props.id, this)
-  }
 
   componentWillReceiveProps ({ id, show }) {
     if (id !== this.props.id) {
@@ -44,6 +37,34 @@ export default class Hero extends Component {
     } else if (show && !this.props.show) {
       this.context.heroAnimationProvider.animate(this.props.id, this)
     }
+  }
+
+  componentWillEnter (callback) {
+    if (this.props.show) {
+      this.context.heroAnimationProvider.animate(this.props.id, this)
+    }
+
+    this.setState({ visible: false })
+    setTimeout(() => {
+      if (this.context.heroAnimationProvider.heroes[this.props.id].visible === this) {
+      this.setState({ visible: true })
+      }
+      callback()
+    }, 400)
+  }
+
+  componentWillLeave (callback) {
+      if (this.context.heroAnimationProvider.heroes[this.props.id].visible === this) {
+      setTimeout(callback, 400)}else {
+        callback()
+      }
+  }
+
+  componentDidLeave () {
+    if (this._animationTimeout != null) {
+      clearTimeout(this._animationTimeout)
+    }
+    this.context.heroAnimationProvider.unregister(this.props.id, this)
   }
 
   animateTo (hero, callback) {

@@ -21,9 +21,9 @@ export default class HeroDemo extends Component {
           <div style={{ background: '#ccf', width: 400, height: 200 }}>B</div>
         </Hero>
 
-        <Hero id='hero-1' show={index % 3 === 2}>
+        {index % 3 === 2 && <Hero id='hero-1' show>
           <div style={{ background: '#fcc', width: 100, height: 300 }}>C</div>
-        </Hero>
+        </Hero>}
       </HeroAnimationProvider>
     )
   }
