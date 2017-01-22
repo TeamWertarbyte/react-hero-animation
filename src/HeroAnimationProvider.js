@@ -6,6 +6,10 @@ export default class HeroAnimationProvider extends Component {
     heroAnimationProvider: PropTypes.object
   }
 
+  static propTypes = {
+    style: PropTypes.object
+  }
+
   heroes = []
 
   getChildContext () {
@@ -18,6 +22,7 @@ export default class HeroAnimationProvider extends Component {
     return (
       <ReactTransitionGroup
         component='div'
+        style={this.props.style}
       >
         {this.props.children}
       </ReactTransitionGroup>
