@@ -44,7 +44,7 @@ export default class HeroAnimationProvider extends Component {
   unregister (id, hero) {
     const heroPair = this.heroes[id]
     if (heroPair) {
-      if (heroPair.length === 1 && heroPair.heroes[0] === hero) {
+      if (heroPair.heroes.length === 1 && heroPair.heroes[0] === hero) {
         delete this.heroes[id]
       } else {
         heroPair.heroes = heroPair.heroes.filter((h) => h !== hero)

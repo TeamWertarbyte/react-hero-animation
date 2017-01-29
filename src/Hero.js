@@ -54,10 +54,16 @@ export default class Hero extends Component {
   }
 
   componentWillLeave (callback) {
-      if (this.context.heroAnimationProvider.heroes[this.props.id].visible === this) {
-      setTimeout(callback, 400)}else {
-        callback()
+    if (this.context.heroAnimationProvider.heroes[this.props.id].visible === this) {
+      if (this.props.show) {
+        // TODO add a smarter and deterministic way to get the next hero
+        const nextHero = this.context.heroAnimationProvider.heroes[this.props.id].heroes.find((h) => h !== this)
+        this.context.heroAnimationProvider.animate(this.props.id, nextHero)
       }
+      setTimeout(callback, 400)
+    } else {
+      callback()
+    }
   }
 
   componentDidLeave () {
