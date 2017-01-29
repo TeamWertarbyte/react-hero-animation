@@ -39,6 +39,10 @@ export default class Hero extends Component {
     }
   }
 
+  componentWillAppear (callback) {
+    this.componentWillEnter(callback)
+  }
+
   componentWillEnter (callback) {
     if (this.props.show) {
       this.context.heroAnimationProvider.animate(this.props.id, this)
@@ -66,7 +70,7 @@ export default class Hero extends Component {
     }
   }
 
-  componentDidLeave () {
+  componentWillUnmount () {
     if (this._animationTimeout != null) {
       clearTimeout(this._animationTimeout)
     }
