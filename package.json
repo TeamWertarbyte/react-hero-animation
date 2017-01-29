@@ -1,6 +1,6 @@
 {
   "name": "react-hero-animation",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A small react library for hero animations.",
   "main": "lib/index.js",
   "scripts": {
