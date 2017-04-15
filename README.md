@@ -1,4 +1,6 @@
 # react-hero-animation
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/TeamWertarbyte/react-hero-animation.svg)](https://greenkeeper.io/)
 With this library, you can easily create Hero animations in your React apps. A demo is available [here][gh-pages].
 
 ## Usage
